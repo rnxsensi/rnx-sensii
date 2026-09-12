@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RNX SENSI - Official</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Poppins:wght@600&display=swap');
+body{margin:0;background:#070711;color:#fff;font-family:Poppins,sans-serif;display:flex;justify-content:center;padding:15px}
+.card{width:100%;max-width:430px;background:linear-gradient(180deg,#1e1e3a,#121225);border:1px solid #ff005533;border-radius:24px;padding:24px;box-shadow:0 0 30px #ff005522}
+.logo{text-align:center;font-family:Orbitron;font-size:36px;font-weight:800;background:linear-gradient(90deg,#ff0055,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;margin:0}
+.sub{text-align:center;color:#888;font-size:11px;letter-spacing:5px;margin-top:2px;margin-bottom:15px}
+.badge{text-align:center;background:#ff005522;border:1px solid #ff0055;color:#ff5588;font-size:10px;padding:4px 12px;border-radius:20px;display:inline-block;position:relative;left:50%;transform:translateX(-50%);margin-bottom:18px}
+label{font-size:13px;color:#ccc;margin-top:14px;display:block;font-weight:600}
+input,select{width:100%;padding:12px;margin-top:6px;background:#0f0f1a;border:1px solid #333;border-radius:10px;color:#fff;box-sizing:border-box}
+.btn{width:100%;margin-top:22px;padding:15px;background:linear-gradient(90deg,#ff0055,#ff8a00);border:none;border-radius:12px;color:#fff;font-weight:800;font-size:16px;cursor:pointer;font-family:Orbitron;box-shadow:0 4px 20px #ff005544}
+.result{margin-top:22px;background:#0a0a14;border:1px dashed #ff0055;border-radius:16px;padding:18px;display:none}
+.sensi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sensi-box{background:#1c1c2e;border-radius:12px;padding:12px;text-align:center;border:1px solid #2a2a4a}
+.sensi-box span{font-size:9px;color:#888;display:block}
+.sensi-box b{font-size:20px;color:#fff}
+.fire{grid-column:span 2;background:linear-gradient(135deg,#00d2ff,#3a47d5);padding:14px;border-radius:12px;text-align:center;margin-top:6px}
+.footer{text-align:center;margin-top:22px;font-size:11px;color:#555}
+.footer b{color:#ffcc00}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="logo">RNX SENSI</div>
+<div class="sub">OFFICIAL TOOL</div>
+<div class="badge">⚡ POWERED BY RNX GAMING</div>
+<label>📱 Device Name</label><input id="device" placeholder="Vivo T4 5G">
+<label>💾 RAM</label><select id="ram"><option value="4">4 GB</option><option value="6">6 GB</option><option value="8" selected>8 GB</option><option value="12">12 GB</option></select>
+<label>🔄 Refresh Rate</label><select id="hz"><option value="60">60Hz</option><option value="90">90Hz</option><option value="120" selected>120Hz</option><option value="144">144Hz</option></select>
+<button class="btn" onclick="generate()">GENERATE RNX SENSI ⚡</button>
+<div id="res" class="result">
+<h2 id="deviceShow" style="text-align:center;color:#ffcc00;font-size:14px;margin:0 0 12px 0"></h2>
+<div class="sensi-grid">
+<div class="sensi-box"><span>GENERAL</span><b id="g">0</b></div>
+<div class="sensi-box"><span>RED DOT</span><b id="r">0</b></div>
+<div class="sensi-box"><span>2X SCOPE</span><b id="x2">0</b></div>
+<div class="sensi-box"><span>4X SCOPE</span><b id="x4">0</b></div>
+<div class="sensi-box"><span>SNIPER</span><b id="s">0</b></div>
+<div class="sensi-box"><span>FREE LOOK</span><b id="f">0</b></div>
+</div>
+<div class="fire"><span style="font-size:10px">AUTO FIRE BUTTON SIZE</span><br><b id="fireSize" style="font-size:30px">0%</b></div>
+<div id="fireNote" style="margin-top:10px;font-size:11px;color:#888;text-align:center"></div>
+</div>
+<div class="footer">Made with ❤️ by <b>RNX SENSI</b><br>© 2026 RNX Gaming | All Rights Reserved</div>
+</div>
+<script>
+function getAutoFireSize(d,r,h){d=d.toLowerCase();let b=36;if(d.includes("vivo")||d.includes("iqoo"))b=32;else if(d.includes("infinix")||d.includes("tecno"))b=42;else if(d.includes("poco")||d.includes("redmi"))b=35;else if(d.includes("samsung"))b=38;else if(d.includes("oneplus")||d.includes("realme")||d.includes("oppo"))b=34;if(r<=4)b+=6;else if(r==6)b+=3;else if(r>=12)b-=3;if(h>=120)b-=2;if(h>=144)b-=2;return Math.max(28,Math.min(50,b));}
+function generate(){let device=document.getElementById('device').value||'Gaming Device';let ram=parseInt(document.getElementById('ram').value);let hz=parseInt(document.getElementById('hz').value);let fireSize=getAutoFireSize(device,ram,hz);let baseGeneral=200;if(hz>=120)baseGeneral-=15;if(hz>=144)baseGeneral-=5;if(ram>=8)baseGeneral-=5;if(fireSize<=36)baseGeneral+=5;if(fireSize>=42)baseGeneral-=4;baseGeneral=Math.max(160,Math.min(195,baseGeneral+Math.floor(Math.random()*6-3)));let redDot=Math.max(140,Math.min(185,baseGeneral-22-Math.floor(fireSize/10)));let scope2x=Math.max(90,Math.min(140,redDot-35-Math.floor(hz/20)));let scope4x=Math.max(85,Math.min(135,scope2x-5-Math.floor(Math.random()*5)));let sniper=Math.max(35,Math.min(70,65-Math.floor(ram*1.2)+Math.floor(Math.random()*8)));let freeLook=Math.max(100,Math.min(145,110+Math.floor(hz/10)+8));document.getElementById('g').innerText=baseGeneral;document.getElementById('r').innerText=redDot;document.getElementById('x2').innerText=scope2x;document.getElementById('x4').innerText=scope4x;document.getElementById('s').innerText=sniper;document.getElementById('f').innerText=freeLook;document.getElementById('fireSize').innerText=fireSize+"%";document.getElementById('deviceShow').innerText=device.toUpperCase()+" | RNX SENSI";document.getElementById('fireNote').innerText="Optimized by RNX SENSI for "+device;document.getElementById('res').style.display='block';}
+</script>
+</body>
+</html>
